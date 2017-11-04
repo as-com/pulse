@@ -3,21 +3,21 @@ import {Post} from "../Ingester";
 import {MinuteBuckets} from "../MinuteBuckets";
 import * as _ from "lodash";
 
-export class Hashtags extends Aggregator {
-	hashtag_buckets = new MinuteBuckets<string>(15000);
+export class Mentions extends Aggregator {
+	buckets = new MinuteBuckets<string>(15000);
 
 	_process(post: Post) {
 		const date = new Date();
-		_.uniq(post.hashtags).forEach(w => this.hashtag_buckets.push(date, w));
+		_.uniq(post.mentions).forEach(w => this.buckets.push(date, w));
 	}
 
 	calc() {
 		const freq = new Map<string, number>();
-		this.hashtag_buckets.forEach(function (hashtag) {
-			if (freq.has(hashtag)) {
-				freq.set(hashtag, freq.get(hashtag) + 1);
+		this.buckets.forEach(function (mention) {
+			if (freq.has(mention)) {
+				freq.set(mention, freq.get(mention) + 1);
 			} else {
-				freq.set(hashtag, 1);
+				freq.set(mention, 1);
 			}
 		});
 

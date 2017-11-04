@@ -81,6 +81,24 @@
                         <div class="label">positive</div>
                     </div>
                 </div>
+
+                <br>
+                <div class="row">
+                    <div class="four wide column">
+                        <div class="ui center aligned segment">
+                            <h3 class="ui header large">
+                                Trending Mentions
+                            </h3>
+                            <div id="mentions">
+                                <transition-group name="words-list" class="ui list" tag="div">
+                                    <div v-for="item in items" class="wordlist-item item" v-bind:key="item[0]">
+                                        @{{ item[0] }}
+                                    </div>
+                                </transition-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="four wide column">
