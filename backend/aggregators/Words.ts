@@ -2,6 +2,8 @@ import {Aggregator} from "../Aggregator";
 import {Post} from "../Ingester";
 import {MinuteBuckets} from "../MinuteBuckets";
 
+const blacklist = new Set(require("./word_blacklist.json").map(w => w.toLowerCase()));
+
 export class Words extends Aggregator {
 	buckets = new MinuteBuckets<string>();
 
@@ -10,7 +12,13 @@ export class Words extends Aggregator {
 		if (matches === null) {
 			return;
 		}
-		const words = matches.map(x => x.toLowerCase());
+		const words = matches.map(x => x.toLowerCase()).filter(w => {
+			if (w.length <= 2) {
+				return false;
+			}
+
+			return !blacklist.has(w);
+		});
 		const date = new Date();
 		words.forEach(w => this.buckets.push(/*post.time*/ date, w));
 	}
