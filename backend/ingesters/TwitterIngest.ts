@@ -29,17 +29,30 @@ export class TwitterIngest extends EventEmitter implements Ingester {
 
     establish_stream() {
         console.log("twitter establish_stream");
-        var that = this;
+        const that = this;
 
         const request = client.request;
-        const rl = ReadLine.createInterface({
-            input: request.post({
-                uri: "https://stream.twitter.com/1.1/statuses/filter.json",
-                form: {
-                    follow: users
-                }
-            })
+        const stream = request.post({
+	        uri: "https://stream.twitter.com/1.1/statuses/filter.json",
+	        form: {
+		        follow: users
+	        }
         });
+        const rl = ReadLine.createInterface({
+            input: stream
+        });
+
+        let error = function (e) {
+            error = function () {};
+            console.error(e);
+
+            that.establish_stream();
+
+            stream.destroy();
+        };
+
+        stream.on("error", error);
+        stream.on("finish", error);
 
 	    rl.on("line", line => {
 	        // console.log(line);
@@ -47,11 +60,7 @@ export class TwitterIngest extends EventEmitter implements Ingester {
 		    this.process_data(event);
 	    });
 
-	    rl.on("close", function(error) {
-		    console.error(error);
-		    // throw error;
-		    that.establish_stream();
-	    });
+	    rl.on("close", error);
     }
 
     process_data(event) {
