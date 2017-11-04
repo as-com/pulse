@@ -6,7 +6,7 @@ import * as _ from "lodash";
 const blacklist = new Set(require("./word_blacklist.json").map(w => w.toLowerCase()));
 
 export class Words extends Aggregator {
-	buckets = new MinuteBuckets<string>(10000);
+	buckets = new MinuteBuckets<string>(15000);
 
 	_process(post: Post) {
 		const matches = post.message.match(/\b(\w+)\b/g); // TODO: handle non-english

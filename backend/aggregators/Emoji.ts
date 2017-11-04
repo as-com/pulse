@@ -1,19 +1,20 @@
 import {Aggregator} from "../Aggregator";
 import {Post} from "../Ingester";
 import {MinuteBuckets} from "../MinuteBuckets";
-import { extractEmoji } from 'extract-emoji';
-
+const emojiRegex = require('emoji-regex');
+const regex = emojiRegex();
+import * as _ from "lodash";
 
 export class Emoji extends Aggregator {
-    emoji_buckets = new MinuteBuckets<string>(10000);
+    emoji_buckets = new MinuteBuckets<string>(15000);
 
     _process(post: Post) {
-        const matches = extractEmoji(post.message);
+        const matches = post.message.match(regex);
         if (matches === null || matches.length == 0) {
             return;
         }
         const date = new Date();
-        matches.forEach(w => this.emoji_buckets.push(date, w));
+        _.uniq(matches).forEach(w => this.emoji_buckets.push(date, w));
     }
 
     calc() {
@@ -28,7 +29,7 @@ export class Emoji extends Aggregator {
 
         const entries = Array.from(freq.entries()).sort((a, b) => b[1] - a[1]);
 
-        return entries.slice(0, 20);
+        return entries.slice(0, 18);
     }
 
 }
