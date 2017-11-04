@@ -15,6 +15,11 @@ header {
 #pulse-header {
     color: #FAFAFA;
     padding-top: 50px;
+    font-size: 3em;
+}
+
+.pulse-tagline {
+    margin-top: 0;
 }
 
 #toxicity-moon, #sentiment-moon {
