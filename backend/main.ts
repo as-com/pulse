@@ -1,11 +1,13 @@
 require('dotenv').config();
 
 import {RedditIngest} from "./ingesters/RedditIngest";
+import {TwitterIngest} from "./ingesters/TwitterIngest";
 import {Ingester, Post} from "./Ingester";
 import SortedSet = require("collections/sorted-set");
 
 const ingesters: Ingester[] = [
-	new RedditIngest()
+	new RedditIngest(),
+	new TwitterIngest(),
 ];
 
 const recentPosts: SortedSet<Post> = new SortedSet([], function postEquals(a: Post, b: Post) {
