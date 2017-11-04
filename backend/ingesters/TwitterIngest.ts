@@ -50,7 +50,7 @@ export class TwitterIngest extends EventEmitter implements Ingester {
         });
 
         let error = (e) => {
-            this.lock = true;
+            this.lock = false;
             error = function () {};
             console.error(e);
 
