@@ -1,3 +1,5 @@
+import {Emoji} from "./aggregators/Emoji";
+
 require('dotenv').config();
 
 import {Aggregator} from "./Aggregator";
@@ -31,6 +33,7 @@ const ingesters: Ingester[] = [
 
 const aggregators: Aggregator[] = [
 	new Words(metaBroadcast("words")),
+    new Emoji(metaBroadcast("emoji")),
 	new Sentiment(metaBroadcast("sentiment")),
 	new Rate(metaBroadcast("rate")),
 	new Toxicity(metaBroadcast("toxicity")),
