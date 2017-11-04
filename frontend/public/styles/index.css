@@ -1,3 +1,7 @@
+* {
+    -webkit-font-smoothing: antialiased;
+}
+
 header {
     text-align: center;
     margin-left: auto;
