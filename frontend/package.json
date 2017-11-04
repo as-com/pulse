@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/as-com/pulse#readme",
   "dependencies": {
+    "chart.js": "^2.7.1",
     "express": "^4.16.2",
-    "semantic-ui": "^2.2.13"
+    "semantic-ui": "^2.2.13",
+    "socket.io": "^2.0.4"
   }
 }
