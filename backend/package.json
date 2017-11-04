@@ -10,8 +10,10 @@
     "typescript": "^2.6.1"
   },
   "dependencies": {
+    "@types/collections": "^5.0.0",
     "@types/snoowrap": "^1.14.3",
     "@types/twitter": "^0.0.28",
+    "collections": "^5.0.7",
     "dotenv": "^4.0.0",
     "sentiment": "^4.1.0",
     "snoowrap": "^1.14.2",

@@ -3,6 +3,7 @@ import {EventEmitter} from 'events';
 import {Stream} from "stream";
 import {isObject, isString} from "util";
 import fs = require('fs');
+import * as ReadLine from "readline";
 
 var Twitter = require('twitter');
 
@@ -27,17 +28,27 @@ export class TwitterIngest extends EventEmitter implements Ingester {
     establish_stream() {
         console.log("establish_stream");
         var that = this;
-        this.twstream = client.stream('statuses/filter', {follow: users});
 
-        this.twstream.on('data', function(event) {
-            that.process_data(event);
+        const request = client.request;
+        const rl = ReadLine.createInterface({
+            input: request.post({
+                uri: "https://stream.twitter.com/1.1/statuses/filter.json",
+                form: {
+                    follow: users
+                }
+            })
         });
 
-        this.twstream.on('error', function(error) {
-            console.error(error);
-            throw error;
-            // that.establish_stream();
-        });
+	    rl.on("line", line => {
+		    const event = JSON.parse(line);
+		    this.process_data(event);
+	    });
+
+	    rl.on("close", function(error) {
+		    console.error(error);
+		    throw error;
+		    // that.establish_stream();
+	    });
     }
 
     process_data(event) {
