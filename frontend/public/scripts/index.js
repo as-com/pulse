@@ -28,12 +28,34 @@ $(document).ready(function () {
         "labels": [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
         "datasets": [
             {
+                "label": "Reddit",
                 "data": [ ],
-                "fill": false,
+                // "fill": 1,
+                "borderColor": "rgb(29, 185, 85)",
+                "backgroundColor": "rgba(29, 185, 85, 0.3)",
+                "lineTension": 0.1
+            },
+            {
+                "label": "Twitter",
+                "data": [ ],
+                // "fill": 'origin',
                 "borderColor": "rgb(75, 192, 192)",
+                "backgroundColor": "rgba(75, 192, 192, 0.3)",                
                 "lineTension": 0.1
             }
-        ]
+        ],
+        "options": {
+            "plugins": {
+                "filler": {
+                    "propagate": true
+                }
+            },
+            "scales": {
+                "yAxes": [{
+                    "stacked": true
+                }]
+            }
+        }
     }
     var liveLineChart = new Chart(ctx, {
         "type": "line",
@@ -51,7 +73,7 @@ $(document).ready(function () {
         trailColor: '#eee',
         trailWidth: 1,
         easing: 'easeInOut',
-        duration: 1400,
+        duration: 200,
         svgStyle: null,
         text: {
           value: '',
@@ -62,7 +84,7 @@ $(document).ready(function () {
         // Set default step function for all animate calls
         step: (state, bar) => {
           bar.path.setAttribute('stroke', state.color)
-          var value = Math.round(bar.value() * 100)
+          var value = Math.round(bar.value() * 200)
           if (value === 0) {
             bar.setText('')
           } else {
@@ -76,13 +98,14 @@ $(document).ready(function () {
     socket.on('rate', function(rate) {
         if (data.datasets[0].data.length > 20) {
             data.datasets[0].data.shift()
+            data.datasets[1].data.shift()
             // data.labels.pop()
         }
-        data.datasets[0].data.push(rate['rate'])
+        data.datasets[1].data.push(rate['twitter'])
+        data.datasets[0].data.push(rate['reddit'])
         // data.labels.push("")
         liveLineChart.update()        
-        bar.animate(1.0);
-    
-        console.log(rate)
+        
+        bar.animate(rate['total'] / 200);
     })
 })
