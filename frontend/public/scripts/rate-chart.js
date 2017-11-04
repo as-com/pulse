@@ -46,6 +46,7 @@ const liveLineChart = new Chart(ctx, {
 });
 const latestLabel = 0;
 
+const pps = document.getElementById("pps");
 socket.on('rate', function(rate) {
 	if (data.datasets[0].data.length > 20) {
 		data.datasets[0].data.shift();
@@ -56,6 +57,8 @@ socket.on('rate', function(rate) {
 	data.datasets[0].data.push(rate['reddit']);
 	// data.labels.push("")
 	liveLineChart.update();
+
+	pps.innerText = rate.total;
 
 	// bar.animate(rate['total'] / maxRate);
 });

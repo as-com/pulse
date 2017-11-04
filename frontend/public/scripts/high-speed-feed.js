@@ -23,14 +23,18 @@ const feed = document.getElementById("high-speed-feed");
 
 const $firstCol = $("#first-col");
 const $feedCol = $("#feed-col");
-function resizeFeed() {
-	$feedCol.height($firstCol.height());
-}
+// function resizeFeed() {
+// 	$feedCol.height($firstCol.height());
+// }
 // window.addEventListener("resize", resizeFeed);
-setTimeout(resizeFeed, 100);
+// setTimeout(resizeFeed, 100);
 
 socket.on("stream", function (data) {
-	feed.insertBefore(createEventLine(data.poster + " on " + data.source, data.message), feed.firstChild);
+	const el = createEventLine(data.poster + " on " + data.source, data.message);
+	feed.insertBefore(el, feed.firstChild);
+
+	// $(el).transition("fade down in");
+	// $(el).slideDown();
 
 	while (feed.children.length > 10) {
 		feed.removeChild(feed.lastChild);

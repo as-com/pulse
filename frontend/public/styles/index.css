@@ -19,6 +19,25 @@ body {
 }
 
 #feed-segment {
+    flex-grow: 3;
+}
+
+/*#feed-segment {*/
+    /*display: flex;*/
+/*}*/
+
+/*#feed-wrapper {*/
+    /*!*overflow: hidden;*!*/
+    /*!*height: 100%;*!*/
+    /*align-items: stretch;*/
+    /*!*position: relative;*!*/
+/*}*/
+#high-speed-feed {
     overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
+    padding: 1em 1em;
 }
