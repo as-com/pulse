@@ -78,6 +78,7 @@ body {
 
 .wordlist-item {
     transition: all 0.2s;
+    font-size: 1.2em;
 }
 
 .words-list-enter, .words-list-leave-to
@@ -90,3 +91,6 @@ body {
     width: 100%;
 }
 
+.words-segment {
+    margin-bottom: 10px;
+}
