@@ -1,6 +1,6 @@
-import {Aggregator} from "./Aggregator";
-
 require('dotenv').config();
+
+import {Aggregator} from "./Aggregator";
 
 import {RedditIngest} from "./ingesters/RedditIngest";
 import {TwitterIngest} from "./ingesters/TwitterIngest";
@@ -10,6 +10,7 @@ import * as io from "socket.io";
 import {Words} from './aggregators/Words';
 import * as http from "http";
 import {Sentiment} from "./aggregators/Sentiment";
+import {Toxicity} from "./aggregators/Toxicity";
 import {Rate} from "./aggregators/Rate";
 
 const httpServer = http.createServer();
@@ -31,6 +32,7 @@ const aggregators: Aggregator[] = [
 	new Words(metaBroadcast("words")),
 	new Sentiment(metaBroadcast("sentiment")),
 	new Rate(metaBroadcast("rate")),
+	new Toxicity(metaBroadcast("toxicity"))
 ];
 
 function processPost(post: Post) {
