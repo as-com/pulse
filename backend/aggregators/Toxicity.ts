@@ -9,12 +9,15 @@ const PERSPECTIVE_API_KEY = process.env["PERSPECTIVE_API_KEY"];
 export class Toxicity extends Aggregator {
 	private buckets = new MinuteBuckets<number>(20000);
 
-	private request = _.throttle(async (message: string) => {
+	private buffer: string[] = [];
+	private request = _.throttle(async () => {
+		const message = this.buffer[Math.floor(Math.random() * this.buffer.length)];
+		this.buffer = [];
 		try {
 			const response: any = await got.post(`https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=${PERSPECTIVE_API_KEY}`, {
 				json: true,
 				body: {
-					comment: message,
+					comment: {text: message},
 					requestedAttributes: {
 						TOXICITY: {}
 					},
@@ -22,16 +25,18 @@ export class Toxicity extends Aggregator {
 				}
 			});
 
-			console.log(message, response.attributeScores.TOXICITY.summaryScore.value);
+			// console.log(message, response.body.attributeScores.TOXICITY.summaryScore.value);
 
-			this.buckets.push(new Date(), response.attributeScores.TOXICITY.summaryScore.value);
+			this.buckets.push(new Date(), response.body.attributeScores.TOXICITY.summaryScore.value);
 		} catch (e) {
+			// console.log(e);
 			// ???
 		}
 	}, 105);
 
 	_process(post: Post) {
-		this.request(post.message);
+		this.buffer.push(post.message);
+		this.request();
 	}
 
 	calc() {

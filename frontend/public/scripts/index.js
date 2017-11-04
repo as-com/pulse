@@ -1,5 +1,7 @@
 const socket = io("10.105.244.113:3000")
 
+const maxRate = 300
+
 socket.on('words', function(words) {
     
     document.getElementById('words').innerHTML = words
@@ -84,7 +86,7 @@ $(document).ready(function () {
         // Set default step function for all animate calls
         step: (state, bar) => {
           bar.path.setAttribute('stroke', state.color)
-          var value = Math.round(bar.value() * 200)
+          var value = Math.round(bar.value() * maxRate)
           if (value === 0) {
             bar.setText('')
           } else {
@@ -106,6 +108,6 @@ $(document).ready(function () {
         // data.labels.push("")
         liveLineChart.update()        
         
-        bar.animate(rate['total'] / 200);
+        bar.animate(rate['total'] / maxRate);
     })
 })
