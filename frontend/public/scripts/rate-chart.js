@@ -3,8 +3,22 @@ const ctx = document.getElementById("toxicity-chart").getContext("2d");
 //     "width": window.innerWidth
 // })
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function formatDate(d) {
+    var h = addZero(d.getHours());
+    var m = addZero(d.getMinutes());
+    var s = addZero(d.getSeconds());
+	return "   " + h + ":" + m + ":" + s;
+}
+
 const data = {
-	"labels": ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+	"labels": [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
 	"datasets": [
 		{
 			"label": "Reddit",
@@ -31,9 +45,14 @@ const data = {
 		},
 		"scales": {
 			"yAxes": [{
-				"stacked": true
+				"stacked": true,
+				"ticks": {
+					"beginAtZero": true,
+					"min": 0,
+				}
 			}]
-		}
+		},
+		"scaleStartValue": 0
 	}
 };
 const liveLineChart = new Chart(ctx, {
@@ -44,18 +63,24 @@ const liveLineChart = new Chart(ctx, {
 	},
 	maintainAspectRatio: false
 });
-const latestLabel = 0;
 
+var latestLabel = 0;
 socket.on('rate', function(rate) {
 	if (data.datasets[0].data.length > 20) {
 		data.datasets[0].data.shift();
-		data.datasets[1].data.shift()
-		// data.labels.pop()
+		data.datasets[1].data.shift();
 	}
 	data.datasets[1].data.push(rate['twitter']);
 	data.datasets[0].data.push(rate['reddit']);
-	// data.labels.push("")
-	liveLineChart.update();
 
+	if (latestLabel < 20) {
+		data.labels[latestLabel] = formatDate(new Date());
+	} else {
+		data.labels.shift();
+		data.labels.push(formatDate(new Date()));
+	}
+
+	liveLineChart.update();
+	latestLabel++;
 	// bar.animate(rate['total'] / maxRate);
 });
