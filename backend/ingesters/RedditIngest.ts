@@ -14,23 +14,20 @@ function toPosts(c: Comment): Post {
 }
 
 export class RedditIngest extends EventEmitter implements Ingester {
-	r = new snoowrap({
+	r = new snoowrap(<any>{
 		userAgent: "server:com.andrewsun.pulse:v0.1 (by /u/as-com)",
 		clientId: process.env["REDDIT_CLIENT_ID"],
 		clientSecret: process.env["REDDIT_SECRET"],
 		username: process.env["REDDIT_USER"],
-		password: process.env["REDDIT_PASS"]
+		password: process.env["REDDIT_PASS"],
+		requestDelay: 1010,
+		maxRetryAttempts: 5,
+		retryErrorCodes: [500, 502, 503, 504, 522, 521, 520, 524, 523],
+		continueAfterRatelimitError: true
 	});
 
 	constructor() {
 		super();
-
-		this.r.config({
-			requestDelay: 1010,
-			maxRetryAttempts: 5,
-			retryErrorCodes: [500, 502, 503, 504, 522, 521, 520, 524, 523],
-			continueAfterRatelimitError: true
-		});
 
 		this.init();
 	}
