@@ -17,6 +17,7 @@
     "dotenv": "^4.0.0",
     "sentiment": "^4.1.0",
     "snoowrap": "^1.14.2",
-    "twitter": "^1.7.1"
+    "twitter": "^1.7.1",
+    "twitter-enhanced": "^1.4.3"
   }
 }

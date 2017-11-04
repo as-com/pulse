@@ -5,7 +5,7 @@ import {isObject, isString} from "util";
 import fs = require('fs');
 import * as ReadLine from "readline";
 
-var Twitter = require('twitter');
+var Twitter = require('twitter-enhanced');
 
 var client = new Twitter({
     consumer_key: process.env["TWITTER_CONSUMER_KEY"],
@@ -13,8 +13,10 @@ var client = new Twitter({
     access_token_key: process.env["TWITTER_ACCESS_TOKEN_KEY"],
     access_token_secret: process.env["TWITTER_ACCESS_TOKEN_SECRET"]
 });
+// console.log(client)
 
 let users: string = (<string> fs.readFileSync('ingesters/twitter-5000.txt', 'utf8')).split('\n').join(',');
+// let users: string = "21447363,27260086";
 // console.log(users);
 
 export class TwitterIngest extends EventEmitter implements Ingester {
@@ -26,7 +28,7 @@ export class TwitterIngest extends EventEmitter implements Ingester {
     }
 
     establish_stream() {
-        console.log("establish_stream");
+        console.log("twitter establish_stream");
         var that = this;
 
         const request = client.request;
@@ -40,6 +42,7 @@ export class TwitterIngest extends EventEmitter implements Ingester {
         });
 
 	    rl.on("line", line => {
+	        // console.log(line);
 		    const event = JSON.parse(line);
 		    this.process_data(event);
 	    });
@@ -52,25 +55,35 @@ export class TwitterIngest extends EventEmitter implements Ingester {
     }
 
     process_data(event) {
-        if (!isObject(event['contributors'])) {
+        console.log("twitter process_data");
+        if (!isObject(event['user'])) {
             return;
         }
-
+        // console.log("A user");
         if (!isString(event['id_str'])) {
             return;
         }
-
+        // console.log("B id");
         if (!isString(event['text'])) {
             return;
         }
-
-        console.log(event && event['text']);
+        // console.log("C text");
+        // if ('retweeted_status' in event) {
+        //     console.log("filtering retweet");
+        //     return;
+        // }
+        // console.log(event);
+        // console.log(event['entities']);
 
         let post: Post = {
             message: <string> event['text'],
             time: new Date(event['created_at']),
-            hashtags: event['entities']['hashtags'],
-            mentions: event['entities']['user_mentions'],
+            hashtags: event['entities']['hashtags'].map(function (x) {
+                return x['text'];
+            }),
+            mentions: event['entities']['user_mentions'].map(function (x) {
+                return x['screen_name'];
+            }),
             source: "Twitter",
         };
         this.emit("post", [post]);
