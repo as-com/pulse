@@ -1,4 +1,4 @@
-const wordsApp = new Vue({
+const hashtagsApp = new Vue({
 	el: "#hashtags",
 	data: {
 		items: []
@@ -8,5 +8,5 @@ const wordsApp = new Vue({
 
 socket.on("hashtags", function (data) {
 	// emojisApp.items.unshift(data[0]);
-	wordsApp.items = data;
+	hashtagsApp.items = data;
 });
