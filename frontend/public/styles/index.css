@@ -17,3 +17,8 @@ body {
     margin-left: 30px;
     align-content: center;
 }
+
+#feed-segment {
+    overflow: hidden;
+    height: 100%;
+}
