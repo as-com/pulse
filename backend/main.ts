@@ -8,8 +8,11 @@ import {Ingester, Post} from "./Ingester";
 import SortedSet = require("collections/sorted-set");
 import * as io from "socket.io";
 import {Words} from './aggregators/Words';
+import * as http from "http";
 
-const server = io(3000);
+const httpServer = http.createServer();
+httpServer.listen(3000);
+const server = io.listen(httpServer);
 
 function metaBroadcast(event: string) {
 	return function broadcast(obj) {
