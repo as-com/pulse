@@ -2,6 +2,7 @@ import {EventEmitter} from 'events';
 
 export interface Post {
 	message: string;
+	poster: string;
 	time: Date;
 	hashtags: string[];
 	mentions: string[];
