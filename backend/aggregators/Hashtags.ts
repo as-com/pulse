@@ -25,7 +25,7 @@ export class Hashtags extends Aggregator {
 
 		const entries = Array.from(freq.entries()).sort((a, b) => b[1] - a[1]);
 
-		return entries.slice(0, 6);
+		return entries.slice(0, 8);
 	}
 
 }
