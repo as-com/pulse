@@ -8,7 +8,7 @@ export class Sentiment extends Aggregator {
 
 	_process(post: Post) {
 		const sent = sentiment(post.message);
-		this.buckets.push(new Date(), sent);
+		this.buckets.push(new Date(), sent.score);
 	}
 
 	calc() {
@@ -19,6 +19,6 @@ export class Sentiment extends Aggregator {
 			count++;
 		});
 
-		return total / count;
+		return {average: total / count};
 	}
 }
