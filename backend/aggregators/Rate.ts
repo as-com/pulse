@@ -2,8 +2,10 @@ import {Aggregator} from "../Aggregator";
 import {Post} from "../Ingester";
 import {MinuteBuckets} from "../MinuteBuckets";
 
+const window = 10; // seconds
+
 export class Rate extends Aggregator {
-	private buckets = new MinuteBuckets<boolean>(10000);
+	private buckets = new MinuteBuckets<boolean>(window * 1000);
 	_process(post: Post) {
 		this.buckets.push(new Date, true);
 	}
@@ -14,7 +16,7 @@ export class Rate extends Aggregator {
 			count++;
 		});
 
-		return {rate: count / 10};
+		return {rate: count / window};
 	}
 
 }
