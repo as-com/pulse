@@ -2,14 +2,9 @@
 <html>
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="./semantic/dist/semantic.min.css" rel="stylesheet" type="text/css" />
     <link href="./styles/index.css" rel="stylesheet" type="text/css" />
-    <script src="./scripts/socket.io.js" type="text/javascript"></script>
-    <script src="./semantic/dist/semantic.min.js" type="text/javascript"></script>
-    <script src="./scripts/progressbar.min.js" type="text/javascript"></script>
-    <script src="./scripts/Chart.min.js"></script>
-    <script src="./scripts/index.js" type="text/javascript"></script>
+
 </head>
 
 <header>
@@ -21,15 +16,22 @@
         <div class="bar"></div>
         <div class="label">Toxicity</div>
     </div> -->
-    <div class="ui raised segment">
-        <div id="toxicity-moon" class="ui center aligned container"></div>
-    </div>
+    <!--<div class="ui raised segment">-->
+        <!--<div id="toxicity-moon" class="ui center aligned container"></div>-->
+    <!--</div>-->
 
     <div class="ui grid">
-        <div class="row">
-            <div class="twelve wide column">
+        <div class="row stretched">
+            <div class="twelve wide column" id="first-col">
                 <div class="ui segment">
-                    <canvas id="toxicity-chart" class="pulse-main" width="300" height="30"></canvas>
+                    <canvas id="toxicity-chart" class="pulse-main" width="640" height="200"></canvas>
+                </div>
+            </div>
+            <div class="four wide column" id="feed-col">
+                <div class="ui segment" id="feed-segment">
+                    <div class="ui feed" id="high-speed-feed">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,6 +57,21 @@
     <div id="trending-table" class="ui segments">
 
     </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./scripts/socket.io.js" type="text/javascript"></script>
+    <script src="./semantic/dist/semantic.min.js" type="text/javascript"></script>
+    <script src="./scripts/progressbar.min.js" type="text/javascript"></script>
+    <script src="./scripts/Chart.min.js"></script>
+
+    <script>
+	    const socket = io("10.105.244.113:3000");
+    </script>
+    <script src="./scripts/rate-chart.js"></script>
+    <script src="./scripts/high-speed-feed.js"></script>
+    <script src="./scripts/index.js" type="text/javascript"></script>
+
 </body>
 
 </html>
