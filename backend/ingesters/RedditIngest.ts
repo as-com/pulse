@@ -20,7 +20,7 @@ export class RedditIngest extends EventEmitter implements Ingester {
 		clientSecret: process.env["REDDIT_SECRET"],
 		username: process.env["REDDIT_USER"],
 		password: process.env["REDDIT_PASS"],
-		requestDelay: 2000,
+		// requestDelay: 2000,
 		maxRetryAttempts: 5,
 		retryErrorCodes: [500, 502, 503, 504, 522, 521, 520, 524, 523],
 		continueAfterRatelimitError: true
@@ -57,7 +57,7 @@ export class RedditIngest extends EventEmitter implements Ingester {
 			this.ptr = listing[1].id;
 		}
 
-		this.loop();
+		setTimeout(this.loop, 2000);
 	}
 
 
