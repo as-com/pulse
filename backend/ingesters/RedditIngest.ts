@@ -8,7 +8,8 @@ function toPosts(c: Comment): Post {
 		message: c.body,
 		time: new Date(c.created_utc),
 		hashtags: [],
-		mentions: [] // TODO
+		mentions: [], // TODO
+		source: "Reddit"
 	}
 }
 
