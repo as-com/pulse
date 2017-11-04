@@ -15,6 +15,7 @@ import {Sentiment} from "./aggregators/Sentiment";
 import {Toxicity} from "./aggregators/Toxicity";
 import {Rate} from "./aggregators/Rate";
 import {Stream} from "./aggregators/Stream";
+import {Hashtags} from "./aggregators/Hashtags";
 
 const httpServer = http.createServer();
 httpServer.listen(3000);
@@ -38,6 +39,7 @@ const aggregators: Aggregator[] = [
 	new Rate(metaBroadcast("rate")),
 	new Toxicity(metaBroadcast("toxicity")),
 	new Stream(metaBroadcast("stream")),
+	new Hashtags(metaBroadcast("hashtags"))
 ];
 
 function processPost(post: Post) {
