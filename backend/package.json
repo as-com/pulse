@@ -6,11 +6,14 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^8.0.47",
+    "ts-node": "^3.3.0",
     "typescript": "^2.6.1"
   },
   "dependencies": {
+    "@types/snoowrap": "^1.14.3",
     "dotenv": "^4.0.0",
     "sentiment": "^4.1.0",
+    "snoowrap": "^1.14.2",
     "twitter": "^1.7.1"
   }
 }
