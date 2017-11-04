@@ -46,7 +46,25 @@ body {
     flex-grow: 0;
 }
 
+.item {
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+}
+.item-transition {
+    transition: opacity .5s ease;
+}
+.item-enter {
+    opacity: 0;
+}
+.item-leave {
+    opacity: 0;
+    position: absolute; /* important for removal move to work */
+}
 .item-move {
-    /* applied to the element when moving */
-    transition: transform .5s cubic-bezier(.55,0,.1,1);
+    color: red;
+    transition: transform .5s cubic-bezier(.55,0,.1,1); /* applied when moving */
 }

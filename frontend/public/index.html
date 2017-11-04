@@ -56,8 +56,8 @@
             <div class="four wide column">
                 <div class="ui segment">
                     <div id="emojis">
-                        <div v-for="item in items" transition="item">
-                            {{ item.text }}
+                        <div v-for="item in items" class="item" transition="item">
+                            {{ item[0] }}
                         </div>
                     </div>
                 </div>
@@ -101,6 +101,7 @@
     <script src="./scripts/rate-chart.js"></script>
     <script src="./scripts/high-speed-feed.js"></script>
     <script src="./scripts/toxicity.js"></script>
+    <script src="./scripts/emojis.js"></script>
     <script src="./scripts/index.js" type="text/javascript"></script>
 
 </body>
