@@ -52,6 +52,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="four wide column">
+                <div class="ui segment">
+                    <div id="emojis">
+                        <div v-for="item in items" transition="item">
+                            {{ item.text }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -78,6 +88,8 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.5.3/dist/vue.js"></script>
+    <script src="https://cdn.rawgit.com/vuejs/vue-animated-list/87f814e6ba494137054b5063da0e64ec6000b8a9/vue-animated-list.js"></script>
     <script src="./scripts/socket.io.js" type="text/javascript"></script>
     <script src="./semantic/dist/semantic.min.js" type="text/javascript"></script>
     <script src="./scripts/progressbar.min.js" type="text/javascript"></script>
