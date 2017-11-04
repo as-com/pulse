@@ -1,7 +1,7 @@
 import {Ingester, Post} from "../Ingester";
 import {EventEmitter} from 'events';
 import {Stream} from "stream";
-import {isObject, isString} from "util";
+import {isNull, isObject, isString} from "util";
 import fs = require('fs');
 import * as ReadLine from "readline";
 
@@ -56,7 +56,7 @@ export class TwitterIngest extends EventEmitter implements Ingester {
 
             setTimeout(() => {
 	            that.establish_stream();
-            }, 1000);
+            }, 5000);
 
             rl.close();
             stream.destroy();
@@ -99,6 +99,12 @@ export class TwitterIngest extends EventEmitter implements Ingester {
         // }
         // console.log(event);
         // console.log(event['entities']);
+        if ('lang' in event) {
+            let lang = event['lang'];
+            if (!isNull(lang) && !(lang === "en" || lang === "und")) {
+                return false;
+            }
+        }
 
         let post: Post = {
             message: <string> event['text'],

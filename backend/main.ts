@@ -10,6 +10,7 @@ import * as io from "socket.io";
 import {Words} from './aggregators/Words';
 import * as http from "http";
 import {Sentiment} from "./aggregators/Sentiment";
+import {Rate} from "./aggregators/Rate";
 
 const httpServer = http.createServer();
 httpServer.listen(3000);
@@ -28,7 +29,8 @@ const ingesters: Ingester[] = [
 
 const aggregators: Aggregator[] = [
 	new Words(metaBroadcast("words")),
-	new Sentiment(metaBroadcast("sentiment"))
+	new Sentiment(metaBroadcast("sentiment")),
+	new Rate(metaBroadcast("rate")),
 ];
 
 function processPost(post: Post) {
