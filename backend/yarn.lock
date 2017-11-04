@@ -26,6 +26,10 @@
     "@types/node" "*"
     "@types/request" "*"
 
+"@types/twitter@^0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@types/twitter/-/twitter-0.0.28.tgz#814ccca3d125412f4ea2eea16259251efa321ea2"
+
 ajv@^5.1.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-5.3.0.tgz#4414ff74a50879c208ee5fdc826e32c303549eda"

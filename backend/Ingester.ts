@@ -5,6 +5,7 @@ export interface Post {
 	time: Date;
 	hashtags: string[];
 	mentions: string[];
+	source: string;
 }
 
 export interface Ingester extends EventEmitter {
