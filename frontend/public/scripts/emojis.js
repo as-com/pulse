@@ -8,9 +8,5 @@ const emojisApp = new Vue({
 
 socket.on("emoji", function (data) {
 	// emojisApp.items.unshift(data[0]);
-	emojisApp.items = data;
+	emojisApp.items = data.slice(0, 12);
 });
-
-setInterval(function() {
-	emojisApp.items.shift()
-}, 300);

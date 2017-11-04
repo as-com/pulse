@@ -37,29 +37,21 @@ const data = {
 			"lineTension": 0.1
 		}
 	],
-	"options": {
-		"plugins": {
-			"filler": {
-				"propagate": true
-			}
-		},
-		"scales": {
-			"yAxes": [{
-				"stacked": true,
-				"ticks": {
-					"beginAtZero": true,
-					"min": 0,
-				}
-			}]
-		},
-		"scaleStartValue": 0
-	}
 };
 const liveLineChart = new Chart(ctx, {
 	"type": "line",
 	"data": data,
 	"options": {
-		steppedLine: false
+		steppedLine: false,
+        "scales": {
+            "yAxes": [{
+                "display": true,
+                "stacked": true,
+                "ticks": {
+                    "min": 0
+                }
+            }]
+        }
 	},
 	maintainAspectRatio: false
 });
