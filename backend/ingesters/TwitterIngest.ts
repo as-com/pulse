@@ -13,17 +13,19 @@ var client = new Twitter({
     access_token_secret: process.env["TWITTER_ACCESS_TOKEN_SECRET"]
 });
 
-let users = (<string> fs.readFileSync('twitter-5000.txt', 'utf8')).replace('\n', ',');
-console.log(users);
+let users: string = (<string> fs.readFileSync('ingesters/twitter-5000.txt', 'utf8')).split('\n').join(',');
+// console.log(users);
 
 export class TwitterIngest extends EventEmitter implements Ingester {
     twstream: Stream;
 
     constructor() {
+        super();
         this.establish_stream();
     }
 
     establish_stream() {
+        console.log("establish_stream");
         var that = this;
         this.twstream = client.stream('statuses/filter', {follow: users});
 
@@ -33,7 +35,8 @@ export class TwitterIngest extends EventEmitter implements Ingester {
 
         this.twstream.on('error', function(error) {
             console.error(error);
-            that.establish_stream();
+            throw error;
+            // that.establish_stream();
         });
     }
 
