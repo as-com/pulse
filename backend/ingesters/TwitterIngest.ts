@@ -46,8 +46,11 @@ export class TwitterIngest extends EventEmitter implements Ingester {
             error = function () {};
             console.error(e);
 
-            that.establish_stream();
+            setTimeout(() => {
+	            that.establish_stream();
+            }, 1000);
 
+            rl.close();
             stream.destroy();
         };
 
@@ -55,10 +58,15 @@ export class TwitterIngest extends EventEmitter implements Ingester {
         stream.on("finish", error);
 
 	    rl.on("line", line => {
-	        // console.log(line);
-		    const event = JSON.parse(line);
-		    this.process_data(event);
+		    try {
+			    const event = JSON.parse(line);
+			    this.process_data(event);
+            } catch (e) {
+                error(e);
+            }
 	    });
+	    // console.log(line);
+
 
 	    rl.on("close", error);
     }

@@ -9,6 +9,7 @@ import SortedSet = require("collections/sorted-set");
 import * as io from "socket.io";
 import {Words} from './aggregators/Words';
 import * as http from "http";
+import {Sentiment} from "./aggregators/Sentiment";
 
 const httpServer = http.createServer();
 httpServer.listen(3000);
@@ -26,7 +27,8 @@ const ingesters: Ingester[] = [
 ];
 
 const aggregators: Aggregator[] = [
-	new Words(metaBroadcast("words"))
+	new Words(metaBroadcast("words")),
+	new Sentiment(metaBroadcast("sentiment"))
 ];
 
 function processPost(post: Post) {
