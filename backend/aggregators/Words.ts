@@ -43,7 +43,7 @@ export class Words extends Aggregator {
 
 		const entries = Array.from(freq.entries()).sort((a, b) => b[1] - a[1]);
 
-		return entries.slice(0, 10);
+		return entries.slice(0, 20);
 	}
 
 }
