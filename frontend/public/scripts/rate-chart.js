@@ -65,6 +65,7 @@ const liveLineChart = new Chart(ctx, {
 });
 
 var latestLabel = 0;
+const pps = document.getElementById("pps");
 socket.on('rate', function(rate) {
 	if (data.datasets[0].data.length > 20) {
 		data.datasets[0].data.shift();
@@ -82,5 +83,7 @@ socket.on('rate', function(rate) {
 
 	liveLineChart.update();
 	latestLabel++;
+	pps.innerText = rate.total.toFixed(1);
+
 	// bar.animate(rate['total'] / maxRate);
 });
