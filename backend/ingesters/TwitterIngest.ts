@@ -20,7 +20,7 @@ let users: string = (<string> fs.readFileSync('ingesters/twitter-5000.txt', 'utf
 // console.log(users);
 
 export class TwitterIngest extends EventEmitter implements Ingester {
-    twstream: Stream;
+    private lock = false;
 
     constructor() {
         super();
@@ -28,6 +28,13 @@ export class TwitterIngest extends EventEmitter implements Ingester {
     }
 
     establish_stream() {
+        if (this.lock) {
+            console.error("twitter locked, not establishing stream");
+            return;
+        }
+
+        this.lock = true;
+
         console.log("twitter establish_stream");
         const that = this;
 
@@ -42,7 +49,8 @@ export class TwitterIngest extends EventEmitter implements Ingester {
             input: stream
         });
 
-        let error = function (e) {
+        let error = (e) => {
+            this.lock = true;
             error = function () {};
             console.error(e);
 
