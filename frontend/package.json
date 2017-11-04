@@ -1,0 +1,23 @@
+{
+  "name": "pulse-frontend",
+  "version": "1.0.0",
+  "description": "figure it out later",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/as-com/pulse.git"
+  },
+  "author": "wacode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/as-com/pulse/issues"
+  },
+  "homepage": "https://github.com/as-com/pulse#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "semantic-ui": "^2.2.13"
+  }
+}
