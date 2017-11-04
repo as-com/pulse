@@ -4,7 +4,10 @@
 		"target": "esnext",
 		"moduleResolution": "node",
 		"importHelpers": true,
-		"sourceMap": true
+		"sourceMap": true,
+		"lib": [
+			"esnext"
+		]
 	},
 	"exclude": [
 		"node_modules"
