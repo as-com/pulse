@@ -59,7 +59,7 @@ export class RedditIngest extends EventEmitter implements Ingester {
 
 		setTimeout(() => {
 			this.loop();
-		}, 2000);
+		}, 1000);
 	}
 
 
