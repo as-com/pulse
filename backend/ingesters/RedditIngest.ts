@@ -51,12 +51,13 @@ export class RedditIngest extends EventEmitter implements Ingester {
 
 	private async loop() {
 		const listing = await this.r.getNewComments("all", <any>{ limit: 100, before: `t1_${this.ptr}` });
+		console.log(`Fetched ${listing.length} Reddit comments`);
 
-		this.emit("post", listing.slice(0, listing.length - 2).map(toPosts));
+		this.emit("post", listing.slice(0, listing.length - 1).map(toPosts));
 
-		console.log(listing.map(x => x.id));
-
-		process.exit();
+		if (listing.length > 1) {
+			this.ptr = listing[1].id;
+		}
 
 		this.loop();
 	}
