@@ -91,6 +91,6 @@ body {
     width: 100%;
 }
 
-.words-segment {
-    margin-bottom: 10px;
+#words {
+    padding-bottom: 2em;
 }
