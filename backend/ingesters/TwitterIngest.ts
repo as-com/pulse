@@ -49,13 +49,13 @@ export class TwitterIngest extends EventEmitter implements Ingester {
 
 	    rl.on("close", function(error) {
 		    console.error(error);
-		    throw error;
-		    // that.establish_stream();
+		    // throw error;
+		    that.establish_stream();
 	    });
     }
 
     process_data(event) {
-        console.log("twitter process_data");
+        // console.log("twitter process_data");
         if (!isObject(event['user'])) {
             return;
         }

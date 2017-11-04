@@ -11,12 +11,16 @@
   },
   "dependencies": {
     "@types/collections": "^5.0.0",
+    "@types/lodash": "^4.14.81",
     "@types/snoowrap": "^1.14.3",
+    "@types/socket.io": "^1.4.31",
     "@types/twitter": "^0.0.28",
     "collections": "^5.0.7",
     "dotenv": "^4.0.0",
+    "lodash": "^4.17.4",
     "sentiment": "^4.1.0",
     "snoowrap": "^1.14.2",
+    "socket.io": "^2.0.4",
     "twitter": "^1.7.1",
     "twitter-enhanced": "^1.4.3"
   }
