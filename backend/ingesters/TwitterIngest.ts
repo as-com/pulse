@@ -108,6 +108,7 @@ export class TwitterIngest extends EventEmitter implements Ingester {
 
         let post: Post = {
             message: <string> event['text'],
+            poster: event['user']['screen_name'],
             time: new Date(event['created_at']),
             hashtags: event['entities']['hashtags'].map(function (x) {
                 return x['text'];

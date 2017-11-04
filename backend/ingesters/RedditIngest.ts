@@ -6,6 +6,7 @@ import Comment from "snoowrap/dist/objects/Comment";
 function toPosts(c: Comment): Post {
 	return {
 		message: c.body,
+		poster: c.author.name,
 		time: new Date(c.created_utc),
 		hashtags: [],
 		mentions: [], // TODO
