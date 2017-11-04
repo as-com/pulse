@@ -57,7 +57,9 @@ export class RedditIngest extends EventEmitter implements Ingester {
 			this.ptr = listing[1].id;
 		}
 
-		setTimeout(this.loop, 2000);
+		setTimeout(() => {
+			this.loop();
+		}, 2000);
 	}
 
 
