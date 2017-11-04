@@ -1,0 +1,14 @@
+{
+  "name": "pulse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:as-com/pulse.git",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.47",
+    "typescript": "^2.6.1"
+  },
+  "dependencies": {
+    "sentiment": "^4.1.0"
+  }
+}
