@@ -28,8 +28,8 @@
                 </div>
             </div>
             <div class="four wide column" id="feed-col">
-                <div>
-                    <div class="ui small statistic">
+                <div id="stats-top">
+                    <div class="ui statistic">
                         <div class="value" id="pps"></div>
                         <div class="label">posts per second</div>
                     </div>
@@ -37,6 +37,18 @@
                 <div class="ui segment" id="feed-segment">
                     <div id="feed-wrapper">
                         <div class="ui feed" id="high-speed-feed"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="four wide column">
+                <div class="ui center aligned segment">
+                    <div class="ui center aligned container" id="toxicity-moon"></div>
+                    <div class="ui statistic">
+                        <div class="value" id="toxicity-num"></div>
+                        <div class="label">toxic</div>
                     </div>
                 </div>
             </div>
@@ -76,6 +88,7 @@
     </script>
     <script src="./scripts/rate-chart.js"></script>
     <script src="./scripts/high-speed-feed.js"></script>
+    <script src="./scripts/toxicity.js"></script>
     <script src="./scripts/index.js" type="text/javascript"></script>
 
 </body>

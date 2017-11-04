@@ -58,7 +58,7 @@ socket.on('rate', function(rate) {
 	// data.labels.push("")
 	liveLineChart.update();
 
-	pps.innerText = rate.total;
+	pps.innerText = rate.total.toFixed(1);
 
 	// bar.animate(rate['total'] / maxRate);
 });
