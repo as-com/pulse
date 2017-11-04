@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row ">
             <div class="four wide column">
                 <div class="ui center aligned segment">
                     <div class="ui center aligned container" id="toxicity-moon"></div>
@@ -54,10 +54,30 @@
             </div>
 
             <div class="four wide column">
-                <div class="ui segment">
+                <div class="ui center aligned segment">
+                    <h3 class="ui header medium">
+                        Trending Emojis
+                    </h3>
+                    <br>
                     <div id="emojis">
-                        <transition-group name="emojis-list">
-                            <div v-for="item in items" v-bind:key="item[0]">
+                        <transition-group name="emojis-list" tag="div" class="row">
+                            <div v-for="item in items" class="big-emoji" v-bind:key="item[0]">
+                                {{ item[0] }}
+                            </div>
+                        </transition-group>
+                    </div>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <div class="ui center aligned segment">
+                    <h3 class="ui header medium">
+                        Trending Words
+                    </h3>
+                    <br>
+                    <div id="words">
+                        <transition-group name="words-list" class="ui list" tag="div">
+                            <div v-for="item in items" class="wordlist-item item" v-bind:key="item[0]">
                                 {{ item[0] }}
                             </div>
                         </transition-group>
@@ -104,6 +124,7 @@
     <script src="./scripts/high-speed-feed.js"></script>
     <script src="./scripts/toxicity.js"></script>
     <script src="./scripts/emojis.js"></script>
+    <script src="./scripts/words.js"></script>
     <script src="./scripts/index.js" type="text/javascript"></script>
 
 </body>
